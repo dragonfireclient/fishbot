@@ -28,7 +28,6 @@ minetest.register_globalstep(function()
             fb_state=2
         end
     elseif fb_state == 2 then --waiting for bobber to move
-        local nd=minetest.get_node_or_nil(vector.add(bpos,vector.new(0,-0.5,0)))
         if vector.distance(bpos,fb_obpos) > 0 then
             minetest.after('0.1',function()
                 minetest.interact("activate",{type="nothing"})
@@ -36,7 +35,7 @@ minetest.register_globalstep(function()
             fb_state=3
         end
     elseif fb_state == 3 then --waiting til bobber is gone
-        if not get_bobber_pos() then fb_state=0 end
+        if not bpos then fb_state=0 end
     else
         fb_state=0
     end
