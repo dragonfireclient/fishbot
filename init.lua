@@ -16,7 +16,7 @@ end
 local function get_bobber_pos()
 	local obs=minetest.get_objects_inside_radius(ws.dircoord(0,0,0),10)
 	for k,v in ipairs(obs) do
-		local txt = v:get_properties().textures[1] or ""
+		local txt = (v.get_properties and v:get_properties().textures[1]) or (v.get_item_textures and v:get_item_textures())  or ""
 		if txt:find("bobber") then
 			return v:get_pos()
 		end
